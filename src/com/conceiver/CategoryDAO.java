@@ -73,7 +73,7 @@ public class CategoryDAO {
 		JSONObject json = get(uri);
 		
 		if (json == null)
-			throw new AppException(AppConstants.GENERIC_APP_ERROR_CODE, 
+			throw new AppException(AppConstants.ERROR_CODE_NOT_FOUND, 
 					               AppConstants.ERROR_CODE_WHEN_GET_PRICE, 
 					               AppConstants.ERROR_EMPTY_JSON,
 					               "uri [" +uri+"]" ,
@@ -82,7 +82,7 @@ public class CategoryDAO {
 		JSONArray result = json.getJSONArray("results");
 		
 		if (result == null || result.length() == 0)
-			throw new AppException(AppConstants.GENERIC_APP_ERROR_CODE, 
+			throw new AppException(AppConstants.ERROR_CODE_NOT_FOUND, 
 					               AppConstants.ERROR_CODE_ITEMS_NOT_FOUND_FOR_CATEGORY,
 					               AppConstants.ERROR_ITEMS_NOT_FOUND_FOR_CATEGORY,
 					               AppConstants.ERROR_ITEMS_NOT_FOUND_FOR_CATEGORY + "[" + category + "]",
@@ -101,8 +101,11 @@ public class CategoryDAO {
 	
 	private JSONObject get(String uri) throws AppException {
 		if (uri == null || uri.trim().isEmpty())
-			throw new AppException(AppConstants.ERROR_CODE_NOT_FOUND, AppConstants.ERROR_CODE_INVALID_URI,
-					AppConstants.NOT_FOUND_ERROR, AppConstants.ERROR_INVALID_URI, AppConstants.APP_HELP_LINK);
+			throw new AppException(AppConstants.ERROR_CODE_NOT_FOUND, 
+					               AppConstants.ERROR_CODE_INVALID_URI,
+					               AppConstants.NOT_FOUND_ERROR, 
+					               AppConstants.ERROR_INVALID_URI, 
+					               AppConstants.APP_HELP_LINK);
 
 		Client client = ClientBuilder.newClient();
 		WebTarget resource = client.target(uri);
@@ -116,9 +119,11 @@ public class CategoryDAO {
 
 		} else {
 
-			throw new AppException(response.getStatus(), AppConstants.GENERIC_APP_ERROR_CODE,
-					response.readEntity(String.class), AppConstants.ERROR_ON_CALL_URI + " [" + uri + "]",
-					AppConstants.APP_HELP_LINK);
+			throw new AppException(response.getStatus(), 
+					               AppConstants.GENERIC_APP_ERROR_CODE,
+					               response.readEntity(String.class), 
+					               AppConstants.ERROR_ON_CALL_URI + " [" + uri + "]",
+					               AppConstants.APP_HELP_LINK);
 		}
 	}
 

@@ -13,7 +13,9 @@ import javax.ws.rs.Produces;
 
 import javax.ws.rs.core.MediaType;
 
+import com.common.AppConstants;
 import com.errorhandling.AppException;
+import com.errorhandling.ErrorMessage;
 import com.help.Help;
 import com.help.Method;
 
@@ -82,26 +84,40 @@ public class CategoryService {
 	   Method get = new Method();
 	   get.setMethod("GET");
 	   get.setDescription("It gonna get the lower price, higher price and suggested price for a category.");
-	   get.setExample("/MLA5726:/prices");
+	   get.setUri("/categories/:ID:/prices");
+	   get.setExample("/categories/MLA5726/prices");
 	   get.setAnswer("{\"lower\" : 1, \"higher\" : 5, \"suggeste\" : 4 }");
-	   
 	   
 	   Method option = new Method();
 	   option.setMethod("OPTION");
 	   option.setDescription("A little help about the resource");
-	   option.setExample("/MLA5726:/prices");
-	   option.setAnswer("json with methods descriptions");
+	   get.setUri("/categories/:ID:/prices");
+	   option.setExample("/categories/MLA5726/prices");
+	   option.setAnswer("json with a little help");
 	   
 	   
 	   ArrayList <Method> methods = new ArrayList<Method>();
 	   methods.add(get);
 	   methods.add(option);
 	   
+	   ArrayList<String> references = new ArrayList<String>();
+	   references.add("https://api.mercadolibre.com/sites/MLA/categories");
+	   references.add("https://developers.mercadolibre.com/en_us/items-and-searches");
+	   references.add("https://developers.mercadolibre.com/en_us/api-docs");
 	   
-	   help.setName("/:CATEGORY:/prices");
-	   help.setDescription("It returns a price sugestion for the :CATEGORY:. It is based on its lower and higher price.");
+	   help.setName("/categories/:ID:/prices");
+	   help.setDescription("It returns a price sugestion for the category (:ID:). It is based on its lower and higher price.");
 	   help.setMethods(methods);
+	   help.setReferences(references);
 	   
+	   ErrorMessage err = new ErrorMessage();
+	   err.setStatus(-1);
+	   err.setCode(-1);
+	   err.setMessage("Response in case of error");
+	   err.setDetails("For more information see the ling below");
+	   err.setLink(AppConstants.APP_HELP_LINK);
+	   
+	   help.setAnswer_in_case_of_error(err);
 
 	   return help;
    }

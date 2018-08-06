@@ -17,7 +17,7 @@ public class AppException extends Exception {
 	String link;
 	
 	/** detailed error description for developers*/
-	String developerMessage;	
+	String details;	
 	
 	/**
 	 * 
@@ -28,11 +28,11 @@ public class AppException extends Exception {
 	 * @param link
 	 */
 	public AppException(int status, int code, String message,
-			String developerMessage, String link) {
+			String details, String link) {
 		super(message);
 		this.status = status;
 		this.code = code;
-		this.developerMessage = developerMessage;
+		this.details = details;
 		this.link = link;
 	}
 
@@ -54,12 +54,12 @@ public class AppException extends Exception {
 		this.code = code;
 	}
 
-	public String getDeveloperMessage() {
-		return developerMessage;
+	public String getDetails() {
+		return details;
 	}
 
-	public void setDeveloperMessage(String developerMessage) {
-		this.developerMessage = developerMessage;
+	public void setDetails(String details) {
+		this.details = details;
 	}
 
 	public String getLink() {

@@ -2,11 +2,14 @@ package com.help;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "method")
+@XmlType(propOrder={"method", "uri", "description", "example", "answer"})
 public class Method {
 
 	String method;
+	String uri;
 	String example;
 	String description;
 	String answer;
@@ -22,6 +25,16 @@ public class Method {
 	public String getExample() {
 		return example;
 	}
+	
+	
+	@XmlElement
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
+	public String getUri() {
+		return uri;
+	}
+	
 	
 	@XmlElement
 	public void setAnswer(String answer) {

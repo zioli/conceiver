@@ -3,10 +3,9 @@ package com.errorhandling;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
+import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -14,27 +13,23 @@ import com.common.AppConstants;
 
 
 @XmlRootElement
+@XmlType(propOrder={"status", "code", "message","details","link"})
 public class ErrorMessage {
 	
-	/** contains the same HTTP Status code returned by the server */
 	@XmlElement(name = "status")
 	int status;
 	
-	/** application specific error code */
 	@XmlElement(name = "code")
 	int code;
 	
-	/** message describing the error*/
 	@XmlElement(name = "message")
 	String message;
 		
-	/** link point to page where the error message is documented */
 	@XmlElement(name = "link")
 	String link;
-	
-	/** extra information that might useful for developers */
-	@XmlElement(name = "developerMessage")
-	String developerMessage;	
+
+	@XmlElement(name = "details")
+	String details;	
 
 	public int getStatus() {
 		return status;
@@ -60,12 +55,12 @@ public class ErrorMessage {
 		this.message = message;
 	}
 
-	public String getDeveloperMessage() {
-		return developerMessage;
+	public String getDetails() {
+		return details;
 	}
 
-	public void setDeveloperMessage(String developerMessage) {
-		this.developerMessage = developerMessage;
+	public void setDetails (String details) {
+		this.details = details;
 	}
 
 	public String getLink() {
@@ -80,18 +75,27 @@ public class ErrorMessage {
 		try {
 			BeanUtils.copyProperties(this, ex);
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.code = AppConstants.ERROR_CODE_NOT_FOUND;
+			this.status = AppConstants.GENERIC_APP_ERROR_CODE;
+			this.message = "IllegalAccessException";
+			this.details = e.getMessage();
+			this.link = AppConstants.APP_HELP_LINK;
+			
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			this.code = AppConstants.ERROR_CODE_NOT_FOUND;
+			this.status = AppConstants.GENERIC_APP_ERROR_CODE;
+			this.message = "InvocationTargetException";
+			this.details = e.getMessage();
+			this.link = AppConstants.APP_HELP_LINK;
 		}
 	}
 	
 	public ErrorMessage(NotFoundException ex){
-		this.status = Response.Status.NOT_FOUND.getStatusCode();
+		
+		this.status = AppConstants.ERROR_CODE_NOT_FOUND;
 		this.message = ex.getMessage();
-		this.developerMessage = "Resource not found. For more information check the link url";
+		this.details = "Resource not found.";
 		this.link = AppConstants.APP_HELP_LINK;		
 	}
 
