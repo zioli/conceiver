@@ -1,6 +1,8 @@
 **Introduction**</BR>
 The price resource was created to help users place their products price according to the published products under that category
 
+***
+
 - GET Method
 
 **Sintaxe** </BR>
@@ -56,8 +58,8 @@ Category code, for example MLA5725. For more information [see here](https://api.
 | message  | Short description of the error  |
 | detail  | Detailes description of the problem. It may help the developer or ourselves |
 
-
-</BR> 
+ 
+***
 
 - OPTION Method
 
@@ -110,5 +112,60 @@ where
 }
 ```
 
+***
 
-    
+### References
+
+
+**API Mercado Libre**
+
+[MercadoLibre - Categories by Site](https://api.mercadolibre.com/sites/MLA/categories#json)
+
+[MercadoLibre - Categories Attributes](https://developers.mercadolibre.com/en_us/categories-and-attributes#Search-by-category)
+
+[MercadoLibre - Search - options](https://api.mercadolibre.com/sites/MLA/search#options)
+
+
+
+**RESTFull Server (Jersey - Spring - Jackson)**
+
+[Jersey User Guide](https://repo1.maven.org/maven2/org/glassfish/jersey/jersey-documentation/2.7/jersey-documentation-2.7-user-guide.pdf)
+
+[Rest Full First Application](https://www.tutorialspoint.com/restful/restful_first_application.htm)
+
+[Spring Rest Service](https://spring.io/guides/gs/rest-service/#scratch)
+
+
+
+**Error treatment + other features or problems**
+
+[Error Handling - Jersey 2](http://www.codingpedia.org/ama/error-handling-in-rest-api-with-jersey/)
+
+[Error Handling - Generic](https://memorynotfound.com/generic-rest-service-jersey-error-handling/)
+
+[Error Handling - Best Practice](https://stackoverflow.com/questions/39028630/best-practice-for-error-handling-in-jersey-rest-api)
+
+[Json attrbibutes Order - Jersey](https://stackoverflow.com/questions/6679383/jersey-json-key-value-order)
+
+[Problem - dependencies not visible in web inf](https://stackoverflow.com/questions/6083501/maven-dependencies-not-visible-in-web-inf-lib)
+
+[Problem - Jersey Class not found](https://howtodoinjava.com/jersey/solved-java-lang-classnotfoundexception-org-glassfish-jersey-servlet-servletcontainer/)
+
+[Problem - Double as Scientific Notation](https://stackoverflow.com/questions/37722152/set-jackson-objectmapper-class-not-to-use-scientific-notation-for-double)
+
+[Jackson Ignore Properties on Marshalling](https://www.baeldung.com/jackson-ignore-properties-on-serialization)
+
+[Custom Mapper](https://stackoverflow.com/questions/18872931/custom-objectmapper-with-jersey-2-2-and-jackson-2-1/30082203)
+
+
+**AWS**
+
+[AWS Elastic Beanstalk](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html)
+
+[Create a new application in Elastic Beanstalk](https://github.com/snowplow/snowplow/wiki/Create-a-new-application-in-Elastic-Beanstalk-and-upload-the-WAR-file-into-it)
+
+
+
+**Performance Test**
+
+[Performance Tool](https://user.dotcom-monitor.com)

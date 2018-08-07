@@ -1,5 +1,7 @@
 package com.conceiver;
 
+import java.text.DecimalFormat;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -11,6 +13,7 @@ import javax.ws.rs.core.Response.Status.Family;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.beans.PriceSuggestion;
 import com.common.AppConstants;
 import com.errorhandling.AppException;
 
@@ -22,18 +25,33 @@ public class CategoryDAO {
 	 * @return
 	 * @throws AppException
 	 */
-	public Category getPrices(String category) throws AppException{
+	public PriceSuggestion getPrices(String category) throws AppException{
 		
 		String site = category.substring(0, 3).toUpperCase();
+
+		
 
 		String lower_price = getPrice(site, category, true);
 		String higher_price = getPrice(site, category, false);
 		//double suggested = Math.round(((lower_price+higher_price)/2));
 		
-		int l_p = Integer.parseInt(lower_price);
-		int h_p = Integer.parseInt(higher_price);
 		
-		Category cat = new Category(category, l_p, h_p, (l_p+h_p)/2);
+		if (lower_price.equals("") || higher_price.equals(""))
+			throw new AppException(AppConstants.ERROR_CODE_NOT_FOUND, 
+					AppConstants.ERROR_CODE_WHEN_GET_PRICE,
+					AppConstants.NOT_FOUND_ERROR, 
+					AppConstants.ERROR_CODE_WHEN_GET_PRICE + " category ["+category+"] lower ["+lower_price +"] higher : [" + higher_price+ "]", 
+					AppConstants.APP_HELP_LINK);
+	
+		
+		
+		double l_p = Double.parseDouble(lower_price);
+		double h_p = Double.parseDouble(higher_price);
+		
+		DecimalFormat formater = new DecimalFormat("##.00");
+		
+		//PriceSuggestion cat = new PriceSuggestion(category, l_p, h_p, formater.format((l_p+h_p)/2).replace(",",".") );
+		PriceSuggestion cat = new PriceSuggestion(category, l_p, h_p, ((l_p+h_p)/2) );
 		
 		return cat;
 	}
@@ -92,7 +110,10 @@ public class CategoryDAO {
 		
 		String price = item.get("price").toString();
 		
-		return price;
+		if (price == null)
+			price = "";
+		
+		return price.trim().toUpperCase().replace(",",".").replace("[A-Z]", "");
 	}
 
 

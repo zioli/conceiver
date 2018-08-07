@@ -15,9 +15,10 @@ import javax.ws.rs.core.MediaType;
 
 import com.common.AppConstants;
 import com.errorhandling.AppException;
-import com.errorhandling.ErrorMessage;
-import com.help.Help;
-import com.help.Method;
+import com.beans.PriceSuggestion;
+import com.beans.ErrorMessage;
+import com.beans.Help;
+import com.beans.Method;
 
 
 @Path("/categories")
@@ -64,14 +65,16 @@ public class CategoryService {
 ////	   listCategories.add(new Category("MLA1234", 10.5, 20.5, 15.25));
 ////	   return listCategories;
 //   }
+	//TODO agregar a git las referencias que use para construir el proyecto
 
    @GET
    @Path("/{ID}/prices")
    @Produces(MediaType.APPLICATION_JSON)
-   public Category getCategory(@PathParam("ID") String id) throws AppException{
+   public PriceSuggestion getCategory(@PathParam("ID") String id) throws AppException{
 	   CategoryDAO dao = new CategoryDAO();
 	   return dao.getPrices(id);
    }
+   
 
 
    @OPTIONS

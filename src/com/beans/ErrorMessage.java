@@ -1,4 +1,4 @@
-package com.errorhandling;
+package com.beans;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.common.AppConstants;
+import com.errorhandling.AppException;
 
 
 @XmlRootElement

@@ -1,4 +1,4 @@
-package com.help;
+package com.beans;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.errorhandling.ErrorMessage;
+import com.beans.ErrorMessage;
 
 @XmlRootElement(name = "resource")
 @XmlType(propOrder={"name", "description", "methods","references", "answer_in_case_of_error"})
